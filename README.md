@@ -1,113 +1,106 @@
 # Config Validator Project
 
-
-Проект для **валидации INI-конфигов** по заданным правилам. Проверяет наличие обязательных секций, параметров и их значений.
+A project for **validating INI configuration files** based on predefined rules. It checks for required sections, parameters, and their values.
 
 ---
 
-## ⚙️ Настройка окружения
+## ⚙️ Environment Setup
 
-### Cоздание виртуального окружения
+### Creating a virtual environment
 
-**Для Linux/macOS:**
+**For Linux/macOS:**
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-### Установка
+### Installation
 
-Установите зависимости:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-### Запуск тестов
+Install dependencies:
 ```bash
-# Используется значение по умолчанию из задания
+pip install -r requirements.txt
+```
+
+### Running Tests
+```bash
+# Uses the default config value from the task
 pytest 
 
-# С конкретным конфигом
+# With a specific config
 CONFIG_PATH=configs/config_perfect.ini pytest 
 
-# С подробным выводом
+# With verbose output
 CONFIG_PATH=configs/config_perfect.ini pytest -v
 ```
 
-### Артефакты тестового прогона
+### Test Run Artifacts
 
-- **HTML-отчеты**: `test_results/` 
+- **HTML reports**: `test_results/` 
 
-
-
-## 🗂️ Структура проекта
+## 🗂️ Project Structure
 
 ```
-├── configs/             # Тестовые конфиги
-│   ├── config_.ini      # Примеры валидных и невалидных конфигов
-├── framework/           # Логика парсера
+├── configs/             # Test configs
+│   ├── config_.ini      # Examples of valid and invalid configs
+├── framework/           # Parser logic
 │   └── config_parser.py
-├── tests/               # Автотест
+├── tests/               # Autotests
 │   └── test_.py
-├── Makefile             # Управление задачами
-├── requirements.txt     # Зависимости
-└── test_cases.md        # Описание тест-кейсов
+├── Makefile             # Task management
+├── requirements.txt     # Dependencies
+└── test_cases.md        # Test case descriptions
 ```
 
-## 📌 Требования
+## 📌 Requirements
 
 - Python 3.6+
-- Зависимости: `pytest`, `pytest-html`
+- Dependencies: `pytest`, `pytest-html`
 
+## 🚀 Using the Makefile
 
-## 🚀 Использование Makefile
+The project includes a Makefile for convenient management of key tasks.  
+It can create a virtual environment, run tests, format code, and clean the project.
 
-В проекте добавлен Makefile для удобного управления основными задачами.  
-С его помощью можно создавать виртуальное окружение, запускать тесты, форматировать код и очищать проект.
+Main commands:
 
-Основные команды:
-
-- `make init` — создать и настроить виртуальное окружение, установить зависимости из `requirements.txt`  
-- `make activate` — активировать виртуальную среду  
-- `make test` — запустить тесты с конфигурацией по умолчанию  
-- `make test_config` — запустить тесты с использованием `config_perfect.ini`  
-- `make test_all` — запустить тесты для всех конфигурационных файлов из папки `configs` с генерацией html-отчётов  
-- `make clean` — удалить временные и сгенерированные файлы, очистить кеши и результаты тестов  
-
+- `make init` — create and set up a virtual environment, install dependencies from `requirements.txt`  
+- `make activate` — activate the virtual environment  
+- `make test` — run tests with the default configuration  
+- `make test_config` — run tests using `config_perfect.ini`  
+- `make test_all` — run tests for all config files in the `configs` folder and generate html reports  
+- `make clean` — remove temporary and generated files, clean caches and test results  
 
 ---
 
-## 📑 Таблица параметров
+## 📑 Parameter Table
 
-### Секция General
+### Section: General
 
-| Параметр                  | Допустимые значения                                                                                      |
-|---------------------------|---------------------------------------------------------------------------------------------------------|
-| ScanMemoryLimit        | Целое число в интервале [1024-8192]                                                                     |
-| PackageType            | `rpm` / `deb` (в любом регистре)                                                                        |
-| ExecArgMax             | Целое число в интервале [10-100]                                                                         |
-| AdditionalDNSLookup    | `true` / `false` / `yes` / `no` (в любом регистре)                                                      |
-| CoreDumps              | `true` / `false` / `yes` / `no` (в любом регистре)                                                      |
-| RevealSensitiveInfoInTraces | `true` / `false` / `yes` / `no` (в любом регистре)                                                |
-| ExecEnvMax             | Целое число в интервале [10-100]                                                                         |
-| MaxInotifyWatches      | Целое число в интервале [1000-1000000]                                                                   |
-| CoreDumpsPath          | Существующий абсолютный путь к директории в системе                                                      |
-| UseFanotify            | `true` / `false` / `yes` / `no` (в любом регистре)                                                      |
-| KsvlaMode              | `true` / `false` / `yes` / `no` (в любом регистре)                                                      |
-| MachineId              | UUID                                                                                                    |
-| StartupTraces          | `true` / `false` / `yes` / `no` (в любом регистре)                                                      |
-| MaxInotifyInstances    | Целое число в интервале [1024-8192]                                                                     |
-| Locale                 | Языковой стандарт в формате, определённом в RFC 3066                                                    |
+| Parameter                  | Allowed Values                                                                                      |
+|---------------------------|-----------------------------------------------------------------------------------------------------|
+| ScanMemoryLimit           | Integer in the range [1024-8192]                                                                    |
+| PackageType               | `rpm` / `deb` (case-insensitive)                                                                    |
+| ExecArgMax                | Integer in the range [10-100]                                                                       |
+| AdditionalDNSLookup       | `true` / `false` / `yes` / `no` (case-insensitive)                                                  |
+| CoreDumps                 | `true` / `false` / `yes` / `no` (case-insensitive)                                                  |
+| RevealSensitiveInfoInTraces | `true` / `false` / `yes` / `no` (case-insensitive)                                              |
+| ExecEnvMax                | Integer in the range [10-100]                                                                       |
+| MaxInotifyWatches         | Integer in the range [1000-1000000]                                                                 |
+| CoreDumpsPath             | Existing absolute path to a directory in the system                                                 |
+| UseFanotify               | `true` / `false` / `yes` / `no` (case-insensitive)                                                  |
+| KsvlaMode                 | `true` / `false` / `yes` / `no` (case-insensitive)                                                  |
+| MachineId                 | UUID                                                                                                 |
+| StartupTraces             | `true` / `false` / `yes` / `no` (case-insensitive)                                                  |
+| MaxInotifyInstances       | Integer in the range [1024-8192]                                                                    |
+| Locale                    | Language tag in the format defined by RFC 3066                                                      |
 
 ---
 
-### Секция Watchdog
+### Section: Watchdog
 
-| Параметр                  | Допустимые значения                                                                                      |
-|---------------------------|---------------------------------------------------------------------------------------------------------|
-| ConnectTimeout         | Целое число в интервале [1-120] с суффиксом `m` (минуты)                                               |
-| MaxVirtualMemory       | `off` / `auto` или вещественное число в интервале (0, 100]                                              |
-| MaxMemory              | `off` / `auto` или вещественное число в интервале (0, 100]                                              |
-| PingInterval           | Целое число в интервале [100-10000]                                                                     |
-
-
+| Parameter                  | Allowed Values                                                                                      |
+|---------------------------|-----------------------------------------------------------------------------------------------------|
+| ConnectTimeout            | Integer in the range [1-120] with `m` suffix (minutes)                                              |
+| MaxVirtualMemory          | `off` / `auto` or a float in the range (0, 100]                                                     |
+| MaxMemory                 | `off` / `auto` or a float in the range (0, 100]                                                     |
+| PingInterval              | Integer in the range [100-10000]                                                                    |
