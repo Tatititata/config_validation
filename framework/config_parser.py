@@ -12,7 +12,7 @@ class ConfigParser:
         self._load_config()
 
     def _load_config(self):
-        if not self.config_path.endswith("ini"):
+        if not self.config_path.endswith(".ini"):
             raise ValueError(
                 f"Invalid file format: {self.config_path}. Expected '.ini' file"
             )
